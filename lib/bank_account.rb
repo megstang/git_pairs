@@ -15,6 +15,7 @@ class BankAccount
     if @balance >= amount
       @balance -= amount
     end
+    @balance >= amount
   end
 
   def verify?(id, code)
