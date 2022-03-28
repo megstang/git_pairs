@@ -8,7 +8,7 @@ class BankAccount
   end
 
   def deposit(amount)
-    @balance += amount
+    @balance == amount
   end
 
   def withdraw(amount)
@@ -19,6 +19,6 @@ class BankAccount
   end
 
   def verify?(id, code)
-    return false if id == code
+    return true if id == code
   end
 end
