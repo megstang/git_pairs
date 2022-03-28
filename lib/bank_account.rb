@@ -19,6 +19,6 @@ class BankAccount
   end
 
   def verify?(id, code)
-    return false if id == code
+    return false if id != code
   end
 end
