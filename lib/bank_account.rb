@@ -1,9 +1,11 @@
 class BankAccount
-  attr_reader :account_number, :secret_pin, :balance
+  attr_reader :account_number,
+              :secret_pin,
+              :balance
 
-  def initialize(account_number, secret_pin, balance)
-    @account_number = account_number
-    @secret_pin = secret_pin
+  def initialize(id, pin, balance)
+    @account_number = id
+    @secret_pin = pin
     @balance = balance
   end
 
@@ -12,13 +14,10 @@ class BankAccount
   end
 
   def withdraw(amount)
-    if @balance >= amount
-      @balance -= amount
-    end
-    @balance >= amount
+    @balance -= amount if @balance >= amount
   end
 
-  def verify?(id, code)
-    return false if id != code
+  def verify?(id, pin)
+    @account_number == id && @secret_pin == pin
   end
 end
