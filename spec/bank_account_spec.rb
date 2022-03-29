@@ -1,5 +1,5 @@
 require 'pry'
-require "rspec"
+require 'rspec'
 require './lib/bank_account'
 
 describe BankAccount do
@@ -31,33 +31,24 @@ describe BankAccount do
     expect(checking.balance).to eq 195.0
   end
 
-  it 'cannot overdraw account single' do
+  it 'cannot overdraw account' do
     checking = BankAccount.new(123, '0987', 250.0)
     checking.withdraw(255.0)
-
     expect(checking.balance).to eq 250.0
+
+    savings = BankAccount.new(567, '2468', 500.0)
+    savings.withdraw(200.0)
+    savings.withdraw(200.0)
+    savings.withdraw(200.0)
+    expect(savings.balance).to eq 100.0
   end
 
-  it 'cannot overdraw account multiple' do
+  it 'can verify account details' do
     checking = BankAccount.new(123, '0987', 250.0)
-    checking.withdraw(100.0)
-    checking.withdraw(100.0)
-    checking.withdraw(100.0)
-
-    expect(checking.balance).to eq 50.0
-  end
-
-  it 'can verify account details true' do
-    checking = BankAccount.new(123, '0987', 250.0)
+    savings = BankAccount.new(567, '2468', 500.0)
     id = 123; pin = '0987'
 
     expect(checking.verify?(id, pin)).to eq true
-  end
-
-  it 'can verify account details false' do
-    checking = BankAccount.new(123, '0987', 250.0)
-    id = 567; pin = '1234'
-
-    expect(checking.verify?(id, pin)).to eq false
+    expect(savings.verify?(id, pin)).to eq false
   end
 end
